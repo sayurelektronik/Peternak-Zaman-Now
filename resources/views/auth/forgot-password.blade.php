@@ -1,25 +1,39 @@
-<x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600">
-        {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
+@extends('auth.layouts.master')
+@section('title', 'Forgot Password | Peternak Zaman Now')
+
+@section('content')
+    <div class="authincation h-100">
+        <div class="container h-100">
+            <div class="row justify-content-center h-100 align-items-center">
+                <div class="col-md-6">
+                    <div class="authincation-content">
+                        <div class="row no-gutters">
+                            <div class="col-xl-12">
+                                <div class="auth-form">
+                                    <div class="text-center mb-3">
+                                        <a href="index.html"><img src="images/logo-full.png" alt=""></a>
+                                    </div>
+                                    <h4 class="text-center mb-4">Forgot Password</h4>
+                                    Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one. <br> <br>
+                                    <form method="POST" action="{{ route('password.email') }}">
+                                        @csrf
+
+                                        <!-- Email Address -->
+                                        <div class="mb-3">
+                                            <label><strong>Email</strong></label>
+                                            <input type="email" id="email" name="email" class="form-control" required autofocus>
+                                        </div>
+                                        
+                                        <div class="text-center">
+                                            <button type="submit" class="btn btn-primary btn-block">Email Password Reset Link</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
-
-    <form method="POST" action="{{ route('password.email') }}">
-        @csrf
-
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Email Password Reset Link') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+@endsection
